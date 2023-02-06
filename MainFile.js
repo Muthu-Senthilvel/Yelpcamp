@@ -2,17 +2,16 @@ const express = require ('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const {stringify} = require('uuid');
-const Campground = require('./model/campground');
+// const {stringify} = require('uuid');
+const Newcampground = require('./model/Templete');
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelpcamp',{useNewUrlParser:true,useUnifiedTopology:true})
- .then(() =>{
-    console.log('Mongo connection open!!!')
-})
- .catch(err =>{
-    console.log('Oh No Mongo connection error')
-    console.log(err)
+mongoose.connect('mongodb://127.0.0.1:27017/yelpcamp',{useNewUrlParser:true,useUnifiedTopology:true});
+const db = mongoose.connection;
+db.on("error",console.error.bind(console,"Connection Error:"));
+db.once("open",()=>{
+    console.log("Database connected");
 });
+
 
 app.set('views engine','ejs');
 app.set('views',path.join(__dirname,'views'))
