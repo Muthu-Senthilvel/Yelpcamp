@@ -2,8 +2,8 @@ const express = require ('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-// const {stringify} = require('uuid');
-const Newcampground = require('./model/Templete');
+const {stringify} = require('uuid');
+const Campground = require('./model/Templete');
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelpcamp',{useNewUrlParser:true,useUnifiedTopology:true});
 const db = mongoose.connection;
@@ -18,6 +18,11 @@ app.set('views',path.join(__dirname,'views'))
 
 app.get('/yelpcamp',(req,res)=>{
     res.render('mainview.ejs')
+})
+
+app.get('/yelpcamp/templete',async(req,res)=>{
+    const camp = await new Campground({title:'My background',description:'Cheap camping!!'});
+    res.send(camp);
 })
 
 app.listen(3000,()=>{
