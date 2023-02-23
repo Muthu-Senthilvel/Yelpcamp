@@ -35,7 +35,7 @@ app.get('/yelpcamp',async(req,res)=>{
     res.render('home.ejs',{allcampgrounds})
 })
 
-app.get('/yelpcamp/new',(req,res)=>{
+app.get('/yelpcamp/new', verifiedPasscord,(req,res)=>{
     res.render('New.ejs')
 })
 app.post('/yelpcamp',async(req,res)=>{
@@ -65,10 +65,6 @@ app.delete('/yelpcamp/:id',async(req,res)=>{
     const{id}=req.params;
     const deletecampground= await Campground.findByIdAndDelete(id);
     res.redirect('/yelpcamp');
-})
-
-app.get('/secret',verifiedPasscord,(req,res)=>{
-    res.send('THIS IS MY SECRET!!!!')
 })
 
 app.use((req,res)=>{
