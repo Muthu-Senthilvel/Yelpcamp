@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const {stringify} = require('uuid');
+const morgan = require('morgan')
 const methodOverride = require('method-override')
 const Campground = require('./model/Templete');
 const { findByIdAndUpdate } = require('./model/Templete');
@@ -16,6 +17,15 @@ db.once("open",()=>{
 
 app.set('views engine','ejs');
 app.set('views',path.join(__dirname,'views'))
+
+app.use(morgan('dev'))
+const verifiedPasscord =(req,res,next)=>{
+    const {passcord} = req.query;
+    if (passcord==='Muthu'){
+        next();
+    }
+    res.send('SORRY WRONG PASSCORD')
+}
 
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
@@ -55,6 +65,14 @@ app.delete('/yelpcamp/:id',async(req,res)=>{
     const{id}=req.params;
     const deletecampground= await Campground.findByIdAndDelete(id);
     res.redirect('/yelpcamp');
+})
+
+app.get('/secret',verifiedPasscord,(req,res)=>{
+    res.send('THIS IS MY SECRET!!!!')
+})
+
+app.use((req,res)=>{
+    res.send('ENTER PROPER URL PATH!!!!')
 })
 
 app.listen(3000,()=>{
