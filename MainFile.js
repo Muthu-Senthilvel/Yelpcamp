@@ -3,8 +3,9 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const {stringify} = require('uuid');
-const morgan = require('morgan')
-const methodOverride = require('method-override')
+const morgan = require('morgan');
+const ejsMate = require('ejs-mate');
+const methodOverride = require('method-override');
 const Campground = require('./model/Templete');
 const { findByIdAndUpdate } = require('./model/Templete');
 
@@ -15,6 +16,7 @@ db.once("open",()=>{
     console.log("Database connected");
 });
 
+app.engine('ejs',ejsMate);
 app.set('views engine','ejs');
 app.set('views',path.join(__dirname,'views'))
 

@@ -1,24 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDIT</title>
-</head>
-<body>
-    <H1>EDIT CAMPGROUND</H1>
-    <form action="/yelpcamp/<%=singleCamp._id%>?_method=PUT" method="POST">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="campground[title]" id="title" value=" <%= singleCamp.title%>">
+    <% layout('/boilerplate.ejs')%>
+    <div class="row">
+        <h1 class="text-center ">EDIT CAMPGROUND</h1>
+        <div class="col-6 offset-3">
+            <form action="/yelpcamp/<%=singleCamp._id%>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" name="campground[title]" id="title"value=" <%= singleCamp.title%>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" name="campground[location]" id="location"value=" <%= singleCamp.location%>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Image Url</label>
+                    <input class="form-control" type="text" name="campground[image]" id="image"value=" <%= singleCamp.image%>">
+                </div>
+                <div class="mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" for="price" id="price">Price in ₹</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="price" value="<%=singleCamp.price %>">
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Description</label>
+                    <textarea class="form-control" type="text" name="campground[description]" id="description"><%=singleCamp.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">ADD</button>
+                </div> 
         </div>
-        <div>
-            <label for="location">Location</label>
-            <input type="text" name="campground[location]]" id="location" value=" <%= singleCamp.location%>">
-        </div>
-        <div><button>UPDATE</button></div>
-        <a href="/yelpcamp/<%= singleCamp._id%>">Back to Campground</a>
-    </form>
-</body>
-</html>
+    </div>
+   

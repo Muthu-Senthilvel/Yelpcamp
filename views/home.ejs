@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Campgrounds</title>
-</head>
-<body>
+    <% layout('/boilerplate.ejs')%>
     <h1>ALL CAMPGROUNDS</h1>
-    <a href="/yelpcamp/new">New Campground</a>
-    <ul>
-        <% for (let campground of allcampgrounds){ %>
-        <li> <a href="/yelpcamp/<%= campground._id%> "><%= campground.title %></a></li>
+    <div>
+    <div><a class="btn btn-primary mt-3 mb-3" href="/yelpcamp/new">New Campground</a>
+    </div>
+        <%for (let campground of allcampgrounds){ %>
+        <div class="card"mb-3>
+            <div class="row">
+                <col class="col-md-4">
+                    <img class="img-fluid max-width:25% height:auto"src="<%=campground.image%>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%=campground.title%></h5>
+                    <p class="card-text"><%=campground.description %></p>
+                    <p class="card-text">
+                        <small class="text-muted"><%=campground.location %></small>
+                    </p>
+                    <a class="btn btn-primary" href="/yelpcamp/<%= campground._id%>">View <%=campground.title %></a>
+                </div>
+            </div>
+        </div>
         <% } %>
-    </ul>
-</body>
-</html>
+    </div>
