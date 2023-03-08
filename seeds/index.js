@@ -17,7 +17,7 @@ const seedDB = async()=>{
     await Campground.deleteMany({});
     for(let i=0;i<20;i++){
         const random = Math.floor(Math.random()*1000);
-        const price = Math.floor(Math.random()*20+1000 );
+        const price = Math.floor(Math.random()*2000 );
         const images = [
             {
                 url: 'https://res.cloudinary.com/lsegg/image/upload/v1624036639/YelpCamp/guervje6uz8kgzqxfpwd.jpg',
